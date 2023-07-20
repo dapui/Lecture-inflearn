@@ -19,8 +19,10 @@ import org.springframework.context.annotation.FilterType;
 )
 public class AutoAppConfig {
 
+/*  
+ * 동일한 이름의 Bean 충돌 테스트
     @Bean(name = "memoryMemberRepository")
     MemberRepository memberRepository() {
         return new MemoryMemberRepository();
-    }
+    }*/
 }

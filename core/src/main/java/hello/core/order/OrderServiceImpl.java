@@ -16,9 +16,8 @@ public class OrderServiceImpl implements OrderService {
         인터페이스에만 의존하도록 설계와 코드를 변경했다.
         그런데 구현체가 없는데 어떻게 코드를 실행할 수 있을까?
         실제 실행을 해보면 NPE(null pointer exception)가 발생한다.
-     */
-    /*
-        해결방안
+
+        # 해결방안
         이 문제를 해결하려면 누군가가 클라이언트인 OrderServiceImpl 에 DiscountPolicy 의 구현 객체를 대신 생성하고 주입해주어야 한다
         AppConfig 등장
      */
@@ -26,7 +25,19 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-    @Autowired
+/*
+    @Autowired(required = false)  // 수정자 주입(setter 주입), 'required = false' 주입할 대상이 없어도 동작 가능해 진다.
+    public void setMemberRepository(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
+    }
+
+    @Autowired  // 수정자 주입(setter 주입)
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        this.discountPolicy = discountPolicy;
+    }
+*/
+
+    @Autowired  // 생성자 주입
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
