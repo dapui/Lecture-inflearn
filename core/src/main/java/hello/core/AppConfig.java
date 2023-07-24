@@ -44,8 +44,8 @@ public class AppConfig {
     @Bean
     public OrderService orderService() {
         System.out.println("call AppConfig.orderService");
-//        return new OrderServiceImpl(memberRepository(), discountPolicy());    // 필드 주입 테스트로 임시 주석처리
-        return null;
+        return new OrderServiceImpl(memberRepository(), discountPolicy());    // 필드 주입 테스트로 임시 주석처리
+//        return null;
     }
 
     @Bean
