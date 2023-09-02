@@ -27,6 +27,7 @@ public class MyView {
     }
 
     private static void modelToRequestAttribute(Map<String, Object> model, HttpServletRequest request) {
+        // jsp는 request.setAttribute()에서 데이터를 조회하기 때문에, 모델의 데이터를 꺼내서 request.setAttribute()로 담아둔다.
         model.forEach((key, value) -> request.setAttribute(key, value));
     }
 }
