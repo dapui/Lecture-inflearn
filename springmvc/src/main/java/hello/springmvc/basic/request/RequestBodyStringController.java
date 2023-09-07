@@ -61,12 +61,15 @@ public class RequestBodyStringController {
         return new HttpEntity<>("ok");
     }
 
+    /**
+     * RequestEntity, ResponseEntity 가 HttpEntity 를 상속 받음
+     */
     @PostMapping("/request-body-string-v31")
     public HttpEntity<String> requestBodyStringV31(RequestEntity<String> httpEntity) {
         String messageBody = httpEntity.getBody();
         log.info("messageBody={}", messageBody);
 
-        return new HttpEntity<>("ok");
+        return new ResponseEntity<String>("ok", HttpStatus.CREATED);
     }
 
     @ResponseBody
