@@ -11,6 +11,9 @@
         <property name="APPROVED_DRIVER" value="mysql.8" />
       </jdbc-additional-properties>
       <working-dir>$ProjectFileDir$</working-dir>
+      <driver-properties>
+        <property name="allowPublicKeyRetrieval" value="TRUE" />
+      </driver-properties>
     </data-source>
   </component>
 </project>
