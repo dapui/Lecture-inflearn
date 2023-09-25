@@ -5,20 +5,21 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 </head>
 <body>
-  <form action="/member/save" method="post">
+  <form action="/member/save" method="post" name="saveForm">
     <input type="text" name="memberEmail" placeholder="이메일" id="memberEmail" onblur="emailCheck()">
     <p id="check-result"></p>
     <input type="text" name="memberPassword" placeholder="비밀번호">
     <input type="text" name="memberName" placeholder="이름">
     <input type="text" name="memberAge" placeholder="나이">
     <input type="text" name="memberMobile" placeholder="전화번호">
-    <input type="submit" value="회원가입">
+    <input type="button" value="회원가입" onclick="save()">
   </form>
 </body>
 <script>
   // 이메일 입력값을 가져오고,
   // 입력값을 서버로 전송하고 똑같은 이메일이 있는지 체크한 후
   // 사용 가능 여부를 이메일 입력창 아래에 표시
+  let emailCheckResult = "";
   const emailCheck = () => {
     const email = document.getElementById("memberEmail").value;
     const checkResult = document.getElementById("check-result");
@@ -34,10 +35,12 @@
         console.log("요청성공", res);
         if (res == "ok") {
           console.log("사용가능한 이메일");
+          emailCheckResult = "Y";
           checkResult.style.color = "green";
           checkResult.innerHTML = "사용가능한 이메일";
         } else {
           console.log("이미 사용중인 이메일");
+          emailCheckResult = "N";
           checkResult.style.color = "red";
           checkResult.innerHTML = "이미 사용중인 이메일";
         }
@@ -46,6 +49,14 @@
         console.log("에러발생", err);
       }
     });
+  }
+
+  const save = () => {
+    if (emailCheckResult == "Y") {
+      document.saveForm.submit();
+    } else {
+      alert('중복된 이메일은 사용할 수 없습니다!');
+    }
   }
 </script>
 </html>
