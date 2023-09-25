@@ -1,6 +1,3 @@
-## Spring Framework 회원 프로젝트
-- 프로젝트 세팅은 제 채널의 세팅 영상을 참고해주세요!
-
 ### 개발환경
 - IntelliJ IDEA Community Edition
 - amazon corretto open jdk 11
