@@ -63,12 +63,14 @@ public class BasicController {
         }
     }
 
+    // 유틸리티 객체와 날짜
     @GetMapping("/date")
     public String date(Model model) {
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "basic/date";
     }
 
+    // URL 링크
     @GetMapping("/link")
     public String link(Model model) {
         model.addAttribute("param1", "data1");
@@ -76,12 +78,14 @@ public class BasicController {
         return "basic/link";
     }
 
+    // 리터럴
     @GetMapping("/literal")
     public String literal(Model model) {
         model.addAttribute("data", "Spring!");
         return "basic/literal";
     }
 
+    // 연산
     @GetMapping("/operation")
     public String operation(Model model) {
         model.addAttribute("nullData", null);
@@ -89,17 +93,20 @@ public class BasicController {
         return "basic/operation";
     }
 
+    // 속성 값 설정
     @GetMapping("/attribute")
     public String attribute() {
         return "basic/attribute";
     }
 
+    // 반복
     @GetMapping("/each")
     public String each(Model model) {
         addUsers(model);
         return "basic/each";
     }
 
+    // 조건부 평가 (if / unless)
     @GetMapping("/condition")
     public String condition(Model model) {
         addUsers(model);
