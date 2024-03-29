@@ -166,7 +166,7 @@ public class ValidationItemControllerV2 {
 
         // 검증 로직
         ValidationUtils.rejectIfEmptyOrWhitespace(bindingResult, "itemName", "required");
-        
+
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
             bindingResult.rejectValue("price", "range", new Object[]{1000,1000000}, null);
         }
