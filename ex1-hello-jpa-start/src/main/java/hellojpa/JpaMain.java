@@ -15,10 +15,15 @@ public class JpaMain {
 
         try {
             // 영속
-            Member member = new Member(200L, "member200");
-            em.persist(member);
+            Member member = em.find(Member.class, 150L);
+            member.setName("AAAAA");
 
-            em.flush();
+            // 준영속
+//            em.detach(member);
+            em.clear(); // 영속성 컨텍스트안에 있는 모든 것을 지움. 초기화
+            // em.close();
+
+            Member member2 = em.find(Member.class, 150L);
 
             System.out.println("===================");
             tx.commit();
