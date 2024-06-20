@@ -16,7 +16,11 @@
             <property name="hibernate.format_sql" value="true"/>
             <property name="hibernate.use_sql_comments"  value="true"/>
             <property name="hibernate.jdbc.batch_size"  value="10"/>
-<!--            <property name="hibernate.hbm2ddl.auto" value="create" />-->
+<!--            <property name="hibernate.hbm2ddl.auto" value="create"/>    // 개발초기 단계 -->
+<!--            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>    // 개발초기 단계 -->
+<!--            <property name="hibernate.hbm2ddl.auto" value="update"/>    // 개발초기 단계 / 테스트 서버 -->
+<!--            <property name="hibernate.hbm2ddl.auto" value="validate"/>  // 테스트 서버 / 스테이징 -->
+<!--            <property name="hibernate.hbm2ddl.auto" value="none"/>      // 스테이징 / 운영 -->
         </properties>
     </persistence-unit>
 
