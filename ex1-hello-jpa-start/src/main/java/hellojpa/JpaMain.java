@@ -2,8 +2,6 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-import java.util.List;
-
 public class JpaMain {
 
     public static void main(String[] args) {
@@ -14,18 +12,12 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // 영속
-            Member member = em.find(Member.class, 150L);
-            member.setName("AAAAA");
+            Member member = new Member();
+            member.setId(1L);
+            member.setUsername("A");
+            member.setRoleType(RoleType.USER);
 
-            // 준영속
-//            em.detach(member);
-            em.clear(); // 영속성 컨텍스트안에 있는 모든 것을 지움. 초기화
-            // em.close();
-
-            Member member2 = em.find(Member.class, 150L);
-
-            System.out.println("===================");
+            em.persist(member);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
