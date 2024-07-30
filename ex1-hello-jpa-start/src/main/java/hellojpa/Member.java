@@ -2,7 +2,7 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
-// // SEQUENCE 전략
+// SEQUENCE 전략
 //@Entity
 //@SequenceGenerator(name = "member_seq_generator", sequenceName = "member_seq", initialValue = 1, allocationSize = 1)
 //public class Member {
