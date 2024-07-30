@@ -1,4 +1,4 @@
-hellojpa\Member.class
-hellojpa\RoleType.class
-hellojpa\Team.class
-hellojpa\JpaMain.class
+hellojpa/Team.class
+hellojpa/JpaMain.class
+hellojpa/RoleType.class
+hellojpa/Member.class
