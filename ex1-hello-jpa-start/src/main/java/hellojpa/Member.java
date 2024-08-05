@@ -80,6 +80,10 @@ public class Member {
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKERT_ID")
+    private Locker locker;
+
     public Long getId() {
         return id;
     }
