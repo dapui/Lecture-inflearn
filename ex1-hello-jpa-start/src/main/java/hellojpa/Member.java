@@ -79,8 +79,9 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false)
+//    @ManyToOne(fetch = FetchType.LAZY)  // 지연로딩 : 사용시 프록시 객체로 조회한다
+    @ManyToOne(fetch = FetchType.EAGER)  // 즉시로딩 : Member와 Team을 Join 하여 한번에 조회한다
+    @JoinColumn
     private Team team;
 
     public Long getId() {
