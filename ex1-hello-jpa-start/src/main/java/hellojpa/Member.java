@@ -79,8 +79,9 @@ public class Member extends BaseEntity {
     @Column(name = "USERNAME")
     private String username;
 
-//    @ManyToOne(fetch = FetchType.LAZY)  // 지연로딩 : 사용시 프록시 객체로 조회한다
-    @ManyToOne(fetch = FetchType.EAGER)  // 즉시로딩 : Member와 Team을 Join 하여 한번에 조회한다
+
+//    @ManyToOne(fetch = FetchType.EAGER)  // 즉시로딩 : Member와 Team을 Join 하여 한번에 조회한다
+    @ManyToOne(fetch = FetchType.LAZY)  // 지연로딩 : 사용시 프록시 객체로 조회한다 (~ToOne은 EAGER가 기본으로 세팅되어있으니 꼭 설정해야함)
     @JoinColumn
     private Team team;
 
