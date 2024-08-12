@@ -14,14 +14,16 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Address address = new Address("city", "street", "123-123");
 
             Member member = new Member();
-            member.setUsername("hello");
-            member.setHomeAddress(new Address("서울", "강남", "123-123"));
-            member.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now()));
-
+            member.setUsername("member1");
+            member.setHomeAddress(address);
             em.persist(member);
-            
+
+            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode()); // 불변객체로 만들면 값을 바꾸기 위해서는 새로 만들어야한다. (부작용 없음)
+            member.setHomeAddress(newAddress);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
