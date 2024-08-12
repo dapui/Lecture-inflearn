@@ -1,10 +1,8 @@
 package hellojpa;
 
 import jakarta.persistence.*;
-import org.hibernate.Hibernate;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class JpaMain {
 
@@ -16,26 +14,14 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
 
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setTeam(team);
-            em.persist(member1);
+            Member member = new Member();
+            member.setUsername("hello");
+            member.setHomeAddress(new Address("서울", "강남", "123-123"));
+            member.setWorkPeriod(new Period(LocalDateTime.now(), LocalDateTime.now()));
 
-            em.flush();
-            em.clear();
-
-            Member m = em.find(Member.class, member1.getId());
-
-            System.out.println("m = " + m.getTeam().getClass());
-
-            System.out.println("=============");
-            m.getTeam().getName();   // FetchType.LAZY의 경우 -> 초기화
-            System.out.println("=============");
-
+            em.persist(member);
+            
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
