@@ -1,8 +1,12 @@
 package hellojpa;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class JpaMain {
 
@@ -14,36 +18,22 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Member member = new Member();
-            member.setUsername("member1");
-            member.setHomeAddress(new Address("homeCity", "street", "12345"));
-            
-            member.getFavoriteFoods().add("치킨");
-            member.getFavoriteFoods().add("족발");
-            member.getFavoriteFoods().add("피자");
 
-            member.getAddressHistory().add(new AddressEntity("old1", "street", "12345"));
-            member.getAddressHistory().add(new AddressEntity("old2", "street", "12345"));
+            // Criteria 사용 준비
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
 
-            em.persist(member);
+            // 루트 클래스 (조회를 시작할 클래스)
+            Root<Member> m = query.from(Member.class);
 
-            em.flush();
-            em.clear();
+            // 쿼리 생성
+            CriteriaQuery<Member> cq = query.select(m);
+            String username = "Dapui";
+            if (username != null) {
+                cq = cq.where(cb.equal(m.get("username"), "kim"));
+            }
 
-            System.out.println("========== START ==========");
-            Member findMember = em.find(Member.class, member.getId());
-
-            // homeCity -> newCity
-//            findMember.getHomeAddress().setCity("newCity");   // 잘못된 방법 (각 타입의 필드 하나만 갈아끼운다 -> 불가)
-            Address oldAddress = findMember.getHomeAddress();
-            findMember.setHomeAddress(new Address("newCity", oldAddress.getStreet(), oldAddress.getZipcode())); // 새로운 인스턴스로 갈아끼워야 함 -> 교체
-
-            // 치킨 -> 한식
-            findMember.getFavoriteFoods().remove("치킨");
-            findMember.getFavoriteFoods().add("한식");
-
-//            findMember.getAddressHistory().remove(new Address("old1", "street", "12345"));
-//            findMember.getAddressHistory().add(new Address("newCity1", "street", "12345"));
+            List<Member> resultList = em.createQuery(cq).getResultList();
 
             tx.commit();
         } catch (Exception e) {
