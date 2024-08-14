@@ -1,12 +1,7 @@
 package hellojpa;
 
 import jakarta.persistence.*;
-import jakarta.persistence.criteria.CriteriaBuilder;
-import jakarta.persistence.criteria.CriteriaQuery;
-import jakarta.persistence.criteria.Root;
 
-import java.time.LocalDateTime;
-import java.util.List;
 
 public class JpaMain {
 
