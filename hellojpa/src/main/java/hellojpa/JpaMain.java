@@ -29,8 +29,8 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-//            String query = "select m from Member m, Team t where m.username = t.name";  // <- 세타조인, 내부조인: inner join, 외부조인: left outer join
-            String query = "select m from Member m left join m.team t on t.name = 'teamA'";
+            String query = "select (select avg(m1.age) from Member m1) as avgAge from Member m join Team t on m.username = t.name"; // 서브쿼리
+//            String query = "select mm from (select m.age, m.username from Member m) as mm"; // From 절의 서브쿼리는 JPQL에서 사용 불가능 -> 조인으로 풀어서 해결해야함
             List<Member> result = em.createQuery(query, Member.class).getResultList();
 
             tx.commit();
