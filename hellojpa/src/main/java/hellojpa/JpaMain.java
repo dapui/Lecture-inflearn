@@ -24,15 +24,23 @@ public class JpaMain {
             member.setUsername("member1");
             member.setAge(10);
             member.setTeam(team);
+            member.setType(MemberType.ADMIN);
             em.persist(member);
 
             em.flush();
             em.clear();
 
-            String query = "select (select avg(m1.age) from Member m1) as avgAge from Member m join Team t on m.username = t.name"; // 서브쿼리
-//            String query = "select mm from (select m.age, m.username from Member m) as mm"; // From 절의 서브쿼리는 JPQL에서 사용 불가능 -> 조인으로 풀어서 해결해야함
-            List<Member> result = em.createQuery(query, Member.class).getResultList();
+//            String query = "select m.username, 'HELLO', TRUE from Member m where m.type = hellojpa.MemberType.ADMIN";
+            String query = "select m.username, 'HELLO', TRUE from Member m where m.type = :userType";
+            List<Object[]> result = em.createQuery(query)
+                    .setParameter("userType", MemberType.ADMIN)
+                    .getResultList();
 
+            for (Object[] objects : result) {
+                System.out.println("objects = " + objects[0]);
+                System.out.println("objects = " + objects[1]);
+                System.out.println("objects = " + objects[2]);
+            }
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
