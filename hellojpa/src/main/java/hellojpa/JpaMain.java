@@ -29,31 +29,31 @@ public class JpaMain {
 
             em.flush();
             em.clear();
-            
-            // 기본 CASE 식
-//            String query =
-//                        "select " +
-//                            "case when m.age <= 10 then '학생요금' " +
-//                            "     when m.age >= 60 then '경로요금' " +
-//                            "     else '일반요금' " +
-//                            "end " +
-//                        "from Member m";
 
-            // 단순 CASE 식
-//            String query =
-//                    "select " +
-//                            "case t.name " +
-//                            "     when '팀A' then '인센티브110%' " +
-//                            "     when '팀B' then '인센티브120%' " +
-//                            "     else '인센티브105%' " +
-//                            "end " +
-//                    "from Team t";
+            /**
+             * JPQL 기본 함수
+             * CONCAT
+             * SUBSTRING
+             * TRIM
+             * LOWER, UPPER
+             * LENGTH
+             * LOCATE
+             * ABS, SQRT, MOD
+             * SIZE, INDEX(JPA 용도)
+             */
+//            String query = "select concat('a', 'b') from Member m";
+//            String query = "select 'a' || 'b' from Member m"; // 하이버네이트에서 제공
+//            String query = "select substring(m.username, 2, 3) from Member m";
+//            String query = "select trim(m.username) from Member m";
+//            String query = "select lower(m.username) from Member m";
+//            String query = "select locate('de','abcdef') from Member m";
+//            String query = "select size(t.members) from Team t";
+//            String query = "select index(t.members) from Team t";   // 사용 안하는걸 추천
+//            String query = "select index(t.members) from Team t";
 
-            // 사용자 이름이 없으면 이름 없는 회원을 반환 (COALESCE : 하나씩 조회해서 null이 아니면 반환)
-//            String query = "select coalesce(m.username, '이름 없는 회원') as username from Member m";
-
-            // 사용자 이름이 '관리자'면 null을 반환하고 나머지는 본인의 이름을 반환 (NULLIF : 두 값이 같으면 null 반환, 다르면 첫번째 값 반환)
-            String query = "select NULLIF(m.username, '관리자') as username from Member m";
+            // 사용자 정의 함수 호출
+//            String query = "select function('group_concat', m.username) from Member m";
+            String query = "select group_concat(m.username) from Member m"; // 하이버네이트에서 제공
 
             List<String> result = em.createQuery(query, String.class).getResultList();
 
