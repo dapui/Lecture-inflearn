@@ -42,39 +42,11 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            // 엔티티 직접 사용 - 기본 키 값
-            // 엔티티를 파라미터로 전달
-//            String query = "select m from Member m where m = :member";
-//            Member findMember = em.createQuery(query, Member.class)
-//                    .setParameter("member", member1)
-//                    .getSingleResult();
-//            System.out.println("findMember = " + findMember);
-
-            // 식별자를 직접 전달
-//            String query = "select m from Member m where m.id = :memberId";
-//            Member findMember = em.createQuery(query, Member.class)
-//                    .setParameter("memberId", member1.getId())
-//                    .getSingleResult();
-//            System.out.println("findMember = " + findMember);
-            
-            // 엔티티 직접 사용 - 외래 키 값
-            // 엔티티를 파라미터로 전달
-//            String query = "select m from Member m where m.team = :team";
-//            List<Member> members = em.createQuery(query, Member.class)
-//                    .setParameter("team", teamA)
-//                    .getResultList();
-//
-//            for (Member member : members) {
-//                System.out.println("member = " + member);
-//            }
-
-            // 식별자를 직접 전달
-            String query = "select m from Member m where m.team.id = :teamId";
-            List<Member> members = em.createQuery(query, Member.class)
-                    .setParameter("teamId", teamA.getId())
+            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+                    .setParameter("username", "회원1")
                     .getResultList();
 
-            for (Member member : members) {
+            for (Member member : resultList) {
                 System.out.println("member = " + member);
             }
 
