@@ -14,6 +14,7 @@ spring:
 #        show_sql: true
         format_sql: true
         default_batch_fetch_size: 100 # 최적화 옵션 (IN 쿼리로 바꿔줌) : 100~1000 사이 선택 (MAX 1000개 권장)
+#    open-in-view: false  # OSIV를 끄면 모든 지연로딩을 트랜잭션 안에서 처리해야 한다.
 
 logging.level:
   org.hibernate.SQL: debug
