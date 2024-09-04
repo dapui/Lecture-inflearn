@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/datajpa
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create            # 애플리케이션 로딩 시점에 테이블을 모두 drop 한 다음 다시 생성 -> 운영에서 사용 X
+    properties:
+      hibernate:
+        #show_sql: true           # JPA가 실행하는 쿼리를 콘솔에 다 찍는 것
+        format_sql: true          # 쿼리가 한줄로 나오는게 아니라 포맷팅되서 나오는 것
+logging.level:
+  org.hibernate.SQL: debug        # JPA가 실행하는 쿼리를 로그파일에 남기는 것
+  org.hibernate.type: trace      # 파라미터 바인딩 되는 파라미터까지 볼 수 있게 하는 것 -> 성능저하 시 주석
