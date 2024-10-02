@@ -14,7 +14,7 @@ public class Member {
     private Long id;
     private String username;
 
-    protected Member() {
+    protected Member() {    // JPA는 기본생성자가 있어야한다.
     }
 
     public Member(String username) {
