@@ -1,5 +1,7 @@
 package study.data_jpa.repository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -27,6 +29,8 @@ class MemberRepositoryTest {
 
     @Autowired MemberRepository memberRepository;
     @Autowired TeamRepository teamRepository;
+    @PersistenceContext
+    EntityManager em;
 
     @Test
     public void testMember() {
@@ -198,4 +202,25 @@ class MemberRepositoryTest {
         assertThat(page.isFirst()).isTrue();
         assertThat(page.hasNext()).isTrue();
     }
+
+    @Test
+    public void bulkAgePlus() {
+        // given
+        memberRepository.save(new Member("member1", 10));
+        memberRepository.save(new Member("member2", 19));
+        memberRepository.save(new Member("member3", 20));
+        memberRepository.save(new Member("member4", 21));
+        memberRepository.save(new Member("member5", 40));
+
+        // when
+        int resultCount = memberRepository.bulkAgePlus(20);
+        // 영속성 초기화 -> 벌크연산 후에는 영속성 초기화 필수! (영속성 컨텍스트에 남아있는 상태로 디비 데이터가 변경되기 때문에)
+        // repositiry에서 @Modifying(clearAutomatically = true) 추가시 생략 가능 (mybatis와 혼용시에는 추가)
+//        em.flush();
+//        em.clear();
+
+        // then
+        assertThat(resultCount).isEqualTo(3);
+    }
+
 }
