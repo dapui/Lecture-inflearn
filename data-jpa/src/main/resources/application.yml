@@ -12,6 +12,13 @@ spring:
       hibernate:
         #show_sql: true           # JPA가 실행하는 쿼리를 콘솔에 다 찍는 것
         format_sql: true          # 쿼리가 한줄로 나오는게 아니라 포맷팅되서 나오는 것
+
+  data:
+    web:
+      pageable:
+        default-page-size: 10
+        max-page-size: 2000
+        #one-indexed-parameters: true  # 페이징 인덱스를 0이 아닌 1부터 시작 -> Page 객체의 실제 응답 데이터와 다를 수 있어 권장하지 않음
 logging.level:
   org.hibernate.SQL: debug        # JPA가 실행하는 쿼리를 로그파일에 남기는 것
   #org.hibernate.type: trace      # 파라미터 바인딩 되는 파라미터까지 볼 수 있게 하는 것 -> 성능저하 시 주석
