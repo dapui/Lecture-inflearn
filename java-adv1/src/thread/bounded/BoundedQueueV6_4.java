@@ -2,29 +2,24 @@ package thread.bounded;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
-public class BoundedQueueV6_1 implements BoundedQueue {
+import static util.MyLogger.log;
+
+public class BoundedQueueV6_4 implements BoundedQueue {
 
     private BlockingQueue<String> queue;
 
-    public BoundedQueueV6_1(int max) {
+    public BoundedQueueV6_4(int max) {
         queue = new ArrayBlockingQueue<>(max);
     }
 
     public void put(String data) {
-        try {
-            queue.put(data);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        queue.add(data); // java.lang.IllegalStateException: Queue full
     }
 
     public String take() {
-        try {
-            return queue.take();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        return queue.remove(); // java.util.NoSuchElementException
     }
     
     @Override

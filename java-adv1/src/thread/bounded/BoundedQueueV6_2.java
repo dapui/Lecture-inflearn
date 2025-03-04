@@ -3,28 +3,23 @@ package thread.bounded;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
-public class BoundedQueueV6_1 implements BoundedQueue {
+import static util.MyLogger.log;
+
+public class BoundedQueueV6_2 implements BoundedQueue {
 
     private BlockingQueue<String> queue;
 
-    public BoundedQueueV6_1(int max) {
+    public BoundedQueueV6_2(int max) {
         queue = new ArrayBlockingQueue<>(max);
     }
 
     public void put(String data) {
-        try {
-            queue.put(data);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        boolean result = queue.offer(data);
+        log("저장 시도 결과 = " + result);
     }
 
     public String take() {
-        try {
-            return queue.take();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        return queue.poll();
     }
     
     @Override

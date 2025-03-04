@@ -2,18 +2,23 @@ package thread.bounded;
 
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
 
-public class BoundedQueueV6_1 implements BoundedQueue {
+import static util.MyLogger.log;
+
+public class BoundedQueueV6_3 implements BoundedQueue {
 
     private BlockingQueue<String> queue;
 
-    public BoundedQueueV6_1(int max) {
+    public BoundedQueueV6_3(int max) {
         queue = new ArrayBlockingQueue<>(max);
     }
 
     public void put(String data) {
         try {
-            queue.put(data);
+            // 대기 시간 설정 가능
+            boolean result = queue.offer(data, 1, TimeUnit.NANOSECONDS);
+            log("저장 시도 결과 = " + result);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -21,7 +26,8 @@ public class BoundedQueueV6_1 implements BoundedQueue {
 
     public String take() {
         try {
-            return queue.take();
+            // 대기 시간 설정 가능
+            return queue.poll(2, TimeUnit.SECONDS);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
