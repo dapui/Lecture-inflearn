@@ -27,13 +27,15 @@ public class FileMemberRepository implements MemberRepository {
     @Override
     public List<Member> findAll() {
         List<Member> members = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH, UTF_8))) {
             String line;
+
             while ((line = br.readLine()) != null) {
                 String[] memberData = line.split(DELIMITER);
-                members.add(new Member(memberData[0], memberData[1],
-                        Integer.valueOf(memberData[2])));
+                members.add(new Member(memberData[0], memberData[1], Integer.valueOf(memberData[2])));
             }
+
             return members;
         } catch (FileNotFoundException e) {
             return new ArrayList<>();
