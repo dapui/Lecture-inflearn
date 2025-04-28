@@ -70,5 +70,15 @@ public class MemberController {
     public void addMember(HttpRequest request, HttpResponse response) {
         log("MemberController.addMember");
         log("request = " + request);
+
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        int age = Integer.parseInt(request.getParameter("age"));
+
+        Member member = new Member(id, name, age);
+        memberRepository.add(member);
+
+        response.writeBody("<h1>save ok</h1>");
+        response.writeBody("<a href='/'>Back to Home</a>");
     }
 }
