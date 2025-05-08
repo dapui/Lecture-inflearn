@@ -27,7 +27,7 @@ public class MyStreamV3Main {
                 .map(s -> s.getName())
                 .toList();
     }
-    
+
     static List<String> ex2(List<Student> students) {
         return MyStreamV3.of(students)
                 .filter(s -> s.getScore() >= 80)
