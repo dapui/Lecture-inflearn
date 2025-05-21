@@ -20,4 +20,11 @@ public class Logger {
             System.out.println("[DEBUG] " + message);
         }
     }
+
+    // DEBUG로 설정한 경우만 출력 - 람다를 받아서 실행
+    public void debug(Supplier<?> supplier) {
+        if (isDebug) {
+            System.out.println("[DEBUG] " + supplier.get());
+        }
+    }
 }
