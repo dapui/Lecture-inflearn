@@ -1,0 +1,18 @@
+package functional;
+
+import java.util.function.Function;
+
+public class SideEffectMain2 {
+
+    public static void main(String[] args) {
+        // 부수 효과(Side Effect) 최소화
+        Function<Integer, Integer> func = x -> {
+            int result = x * 2;
+
+            // 부수 효과(Side Effect)
+            System.out.println("x = " + x + ", result = " + (x * 2));
+            return result;
+        };
+        func.apply(10);
+    }
+}
