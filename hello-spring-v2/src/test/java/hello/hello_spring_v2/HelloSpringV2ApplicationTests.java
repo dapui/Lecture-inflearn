@@ -1,10 +1,10 @@
-package hello.hell_spring_v2;
+package hello.hello_spring_v2;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class HellSpringV2ApplicationTests {
+class HelloSpringV2ApplicationTests {
 
 	@Test
 	void contextLoads() {
