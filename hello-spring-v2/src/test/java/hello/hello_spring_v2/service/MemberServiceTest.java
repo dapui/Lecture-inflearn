@@ -9,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+/** 스트링 단위 테스트용 **/
 class MemberServiceTest {
+
     MemberService memberService;
     MemoryMemberRepository memberRepository;
 
