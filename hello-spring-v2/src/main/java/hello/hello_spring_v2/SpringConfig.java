@@ -1,5 +1,6 @@
 package hello.hello_spring_v2;
 
+import hello.hello_spring_v2.aop.TimeTraceAop;
 import hello.hello_spring_v2.repository.*;
 import hello.hello_spring_v2.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,11 @@ public class SpringConfig {
 //        return new JdbcMemberRepository(dataSource);
 //        return new JdbcTemplateMemberRepository(dataSource);
 //        return new JpaMemberRepository(em);
+//    }
+
+//    TimeTraceAop에 @Component를 추가하지 않을 경우 @Bean으로 등록
+//    @Bean
+//    public TimeTraceAop timeTraceAop() {
+//        return new TimeTraceAop();
 //    }
 }
