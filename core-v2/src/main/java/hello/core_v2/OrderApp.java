@@ -3,10 +3,8 @@ package hello.core_v2;
 import hello.core_v2.member.Grade;
 import hello.core_v2.member.Member;
 import hello.core_v2.member.MemberService;
-import hello.core_v2.member.MemberServiceImpl;
 import hello.core_v2.order.Order;
 import hello.core_v2.order.OrderService;
-import hello.core_v2.order.OrderServiceImpl;
 
 public class OrderApp {
 
@@ -19,7 +17,7 @@ public class OrderApp {
         Member member = new Member(memberId, "memberA", Grade.VIP);
         memberService.join(member);
 
-        Order order = orderService.createOrder(memberId, "itemA", 10000);
+        Order order = orderService.createOrder(memberId, "itemA", 20000);
 
         System.out.println("order = " + order);
     }

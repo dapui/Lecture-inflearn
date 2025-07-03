@@ -3,7 +3,6 @@ package hello.core_v2;
 import hello.core_v2.member.Grade;
 import hello.core_v2.member.Member;
 import hello.core_v2.member.MemberService;
-import hello.core_v2.member.MemberServiceImpl;
 
 public class MemberApp {
 
